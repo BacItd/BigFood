@@ -1,0 +1,60 @@
+﻿@page "/checkout"
+
+@layout Layout.MainLayout
+
+<MudPaper style="padding: 5.625rem; background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/sub-banner-top.jpg?1662429924636) no-repeat; background-size: cover; width: 100%;">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudPaper Style="width: 100%; text-align: center; background-color: transparent; box-shadow: none">
+            <MudText style="color: #fff; margin: 0; font-size: 60px; font-weight: 400">Hoàn thành thanh toán</MudText>
+        </MudPaper>
+    </MudContainer>
+</MudPaper>
+<div style="padding: 50px 0">
+    <MudContainer MaxWidth="MaxWidth.Large">
+        <MudPaper Style="background-color: transparent; box-shadow: none">
+            <MudText Style="font-size: 20px; font-weight: bolder">Đơn hàng mua</MudText>
+        </MudPaper>
+
+        <MudGrid Style="align-items: center; text-align: center; margin-top: 20px; border: 1px solid #d9d9d9; padding: 0px; width: 100%">
+            <MudItem xl="2" lg="4" md="4" sm="6" xs="12" Style="padding: 0px; width: 100%; border-right: 1px solid #d9d9d9">
+                <MudText Style="font-size: 18px; font-weight: bold">Ảnh</MudText>
+            </MudItem>
+            <MudItem Style="padding: 0px; width: 100%; border-right: 1px solid #d9d9d9" xl="6" lg="4" md="4" sm="6" xs="12">
+                <MudText Style="font-size: 18px; font-weight: bold">Tên sản phẩm</MudText>
+            </MudItem>
+            <MudItem Style="padding: 0px; width: 100%;border-right: 1px solid #d9d9d9" xl="2" lg="2" md="2" sm="6" xs="12">
+                <MudText Style="font-size: 18px; font-weight: bold">Số lượng</MudText>
+            </MudItem>
+            <MudItem Style="padding: 0px; width: 100%" xl="2" lg="2" md="2" sm="6" xs="12">
+                <MudText Style="font-size: 18px; font-weight: bold">Giá tiền</MudText>
+            </MudItem>
+        </MudGrid>
+
+        <MudGrid Style="align-items: center; text-align: center; padding: 24px 0; width: 100%">
+            <MudItem xl="2" lg="4" md="4" sm="6" xs="12" Style=" padding: 24px 0; width: 100%">
+                <MudImage Style="width: 100%" Src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+            </MudItem>
+            <MudItem xl="6" lg="4" md="4" sm="6" xs="12" Style=" padding: 24px 0; width: 100%">
+                <MudText>Pizza nhân bò phô mai</MudText>
+            </MudItem>
+            <MudItem xl="2" lg="2" md="2" sm="6" xs="12" Style=" padding: 24px 0; width: 100%">
+                <MudText>5</MudText>
+            </MudItem>
+            <MudItem xl="2" lg="2" md="2" sm="6" xs="12" Style=" padding: 24px 0; width: 100%">
+                <MudText>200000</MudText>
+            </MudItem>
+        </MudGrid>
+
+        <MudGrid Style="margin-top: 20px; padding: 0; width: 100%">
+            <MudItem xl="2" lg="2" md="3" sm="12" xs="12" Style=" padding: 0; width: 100%">
+                <MudButton Style="background-color: transparent; border: 1px solid #000; padding: 5px 10px; width: 100%">Tiếp tục mua sắm</MudButton>
+            </MudItem>
+
+            <MudItem xl="2" lg="2" md="3" sm="12" xs="12" Style=" padding: 0 0 0 10px; width: 100%">
+                <MudButton Style="background-color: #000; color: #fff; border: 1px solid #000; padding: 5px 10px; width: 100%">Tới trang đơn hàng</MudButton>
+            </MudItem>
+
+            <MudItem xl="8" lg="8" md="6" sm="0" xs="12" Style=" padding: 0; width: 100%"></MudItem>
+        </MudGrid>
+    </MudContainer>
+</div>

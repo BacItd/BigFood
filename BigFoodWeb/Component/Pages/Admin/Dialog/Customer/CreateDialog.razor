@@ -1,0 +1,28 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Thêm mới khách hàng</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Spacing="5">
+            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
+            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
+            <MudTextField Style="padding: 0" T="string" Label="Email" />
+            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
+            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Thêm mới</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+
+    private void Cancel() => MudDialog.Cancel();
+}

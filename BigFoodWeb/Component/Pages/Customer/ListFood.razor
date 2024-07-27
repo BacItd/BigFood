@@ -1,0 +1,1016 @@
+﻿@page "/list-food"
+@layout Layout.MainLayout
+<style>
+    .arrange {
+        position: relative;
+    }
+
+    .arrange-child {
+        display: none;
+        position: absolute;
+    }
+
+    .arrange:hover .arrange-child {
+        display: block;
+        z-index: 20;
+    }
+</style>
+
+<div style="margin-bottom: 3rem">
+    <div style="padding: 5.625rem; background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/sub-banner-top.jpg?1662429924636) no-repeat; background-size: cover; width: 100%">
+        <div class="container">
+            <div style="width: 100%; text-align: center">
+                <h2 style="color: #fff; margin: 0; font-size: 60px; font-weight: 400">Tất cả sản phẩm</h2>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <ul class="d-flex justify-content-start gap-3 align-items-center" style="padding: 20px 0; margin-bottom: 30px">
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Trang chủ</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <span>/</span>
+                            </li>
+
+                            <li>
+                                <span style="font-size: 14px; color: #f2b94c">Tất cả sản phẩm</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <aside>
+                        @* danh mục *@
+                        <div class="mb-5">
+
+                            <div style="background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/bg-title.jpg?1662429924636) repeat-x center left #c69c6d; margin-bottom: 30px">
+                                <h2 class="w-100" style="display: inline-block; text-transform: uppercase; font-size: 14px; margin: 0; padding: 0 20px; position: relative; line-height: 40px"><span class="text-white">Danh mục</span></h2>
+                            </div>
+
+                            <div>
+                                <nav>
+                                    <ul class="p-0">
+                                        <li>
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Trang chủ</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Giới thiệu</a>
+                                        </li>
+
+                                        <li style="border-bottom: 1px solid #f0ebe2" class="d-flex justify-content-between align-items-center">
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; ">Sản phẩm</a>
+
+                                            <div>
+                                                <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                    <i class="fa-solid fa-plus" style="color: #603913;"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <div class="collapse" id="collapseExample" style="padding-left: 2rem">
+                                            <div>
+                                                <nav>
+                                                    <ul class="p-0">
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Sản phẩm mới</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Sản phẩm khuyến mãi</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style=" width:100%; font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Sản phẩm nổi bật</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Pizza</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Bánh ngọt</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Bánh kem</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Đồ ăn nhẹ</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+
+                                        <li>
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Khuyến mãi</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Tin tức</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="nav-link" style="font-size: 14px; color: #c69c6d; font-weight: 400; padding: 10px 0; border-bottom: 1px solid #f0ebe2">Liên hệ</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        @* menu sản phẩm bán chạy *@
+                        <div class="mb-5">
+
+                            <div style="background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/bg-title.jpg?1662429924636) repeat-x center left #c69c6d; margin-bottom: 30px">
+                                <h2 class="w-100" style="display: inline-block; text-transform: uppercase; font-size: 14px; margin: 0; padding: 0 20px; position: relative; line-height: 40px"><span class="text-white">Sản phẩm bán chạy</span></h2>
+                            </div>
+
+                            <div style="width: 100%">
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* menu sản phẩm khuyến mãi *@
+                        <div>
+
+                            <div style="background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/bg-title.jpg?1662429924636) repeat-x center left #c69c6d; margin-bottom: 30px">
+                                <h2 class="w-100" style="display: inline-block; text-transform: uppercase; font-size: 14px; margin: 0; padding: 0 20px; position: relative; line-height: 40px"><span class="text-white">Sản phẩm khuyến mãi</span></h2>
+                            </div>
+
+                            <div style="width: 100%">
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div>
+
+                                                <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 3rem">
+                            <img width="100%" src="https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/sidebar_banner.jpg?1676015641182" />
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="col-9">
+                    <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 2rem">
+                        <div>
+                            <span style="font-size: 14px; line-height: 40px; margin-right: 10px">Sắp xếp:</span>
+                            <ul class="m-0 p-0 arrange" style="width: 10rem; float: right">
+                                <li style="border: 1px solid #c69c6d; width: 100%">
+                                    <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                        <span style="font-size: 13px; ">Mặc định</span>
+                                    </button>
+                                </li>
+
+                                <ul class="m-0 p-0 arrange-child" style="background-color: #ffffff; width: 100%"> 
+                                    <li style="border: 1px solid #c69c6d; width: 100%;">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Mặc định</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">A - Z</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Z - A</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Giá tăng dần</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Giá giảm dần</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Mới nhất</span>
+                                        </button>
+                                    </li>
+
+                                    <li style="border: 1px solid #c69c6d; width: 100%; border-top: none">
+                                        <button style="padding: 10px 15px; width: 100%; text-align: left; justify-content: left">
+                                            <span style="font-size: 13px; ">Cũ nhất</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <button class="hihi"><i class="fa-solid fa-table-cells-large hiha" style="color: #acacac;"></i></button>
+                            <button class="haha"><i class="fa-solid fa-list hahi" style="color: #acacac;"></i></button>
+                        </div>
+                    </div>
+
+                    <section>
+                        <div>
+                            <div class="gridLayout">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div>
+                                            <div class="hover-opacity-dad" style="position: relative;">
+                                                <a href="#" class="nav-link hover-opacity-child-2" style=" width: 100%">
+                                                    <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+
+                                                </a>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="nav-link rounded-2 hover-opacity-child" style="position: absolute; padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding-bottom: 3rem">
+                                                <div style="width: 100%; text-align: center;">
+                                                    <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                                </div>
+
+                                                <div style="padding: 10px 15px 0 15px; width: 100%; text-align: center;">
+                                                    <a href="#" class="nav-link">
+                                                        <span style="font-size: 14px">Pizza nhân bò phô mai</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="listLayout" style="display: none">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <img width="100%" src="https://bizweb.dktcdn.net/thumb/large/100/053/643/products/1.jpg?v=1454064638327" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div>
+                                            <h3 style="font-size: 14px; margin-bottom: 1.4rem">Pizza nhân bò phô mai</h3>
+                                            <div style="margin-bottom: .8rem">
+                                                <span style="font-size: 14px">Mô tả đang được cập nhật</span>
+                                            </div>
+                                            <div style="margin-top: .8rem">
+                                                <span style="color: #c69c6d; font-size: 14px">340.000<i class="fa-solid fa-dong-sign" style="color: #c69c6d;"></i></span>
+                                            </div>
+                                            <div style="width: 8.5rem">
+                                                <a href="#" class="nav-link rounded-2" style="margin-top: 1.4rem ;padding: 8px 30px; background-color: #f7b000; color: #ffffff; text-transform: uppercase; font-size: 14px">Mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <div>
+                        <div class="float-end">
+                            <MudPagination Variant="Variant.Outlined" Count="4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+@code {
+}
+
+<script>
+    var GridLayout = document.querySelector('.hihi')
+    var GridList = document.querySelector('.haha')
+    var divGrid = document.querySelector('.gridLayout')
+    var divList = document.querySelector('.listLayout')
+    var color = document.querySelector('.hiha')
+    var color1 = document.querySelector('.hahi')
+
+    color.style.color = '#f2b94c'
+
+    GridLayout.addEventListener('click', () => {
+        divGrid.style.display = 'block'
+        divList.style.display = 'none'
+        color.style.color = '#f2b94c'
+        color1.style.color = '#acacac'
+    })
+
+    GridList.addEventListener('click', () => {
+        divList.style.display = 'block'
+        divGrid.style.display = 'none'
+        color.style.color = '#acacac'
+        color1.style.color = '#f2b94c'
+    })
+</script>

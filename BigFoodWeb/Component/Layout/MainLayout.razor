@@ -1,0 +1,258 @@
+﻿@inherits LayoutComponentBase
+
+@inject NavigationManager NavigationManager
+
+
+
+<style>
+    .hover-opacity-child {
+        display: none;
+        z-index: 50;
+        top: 50%;
+    }
+
+    .hover-opacity-dad:hover .hover-opacity-child-2 {
+        opacity: 0.4;
+    }
+
+    .hover-opacity-dad:hover .hover-opacity-child {
+        display: block;
+    }
+</style>
+@*top bar*@
+<div style="background-color: #fdfaf5;">
+    <div style="background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/bd-bt-tb.png?1662429924636) repeat-x bottom left">
+        <div class="container">
+            <div class="row">
+                <div class="col-3 text-center">
+                    <h5 class="d-block h-100 m-0" style="font-size: 14px; line-height: 60px">Chào mừng bạn đến với bigFood!</h5>
+                </div>
+
+                @* menu nhỏ *@
+                <div class="col-9">
+                    <div>
+                        <ul class="m-0 p-0" style="display: flex; justify-content: right; line-height: 60px; gap: 2.5rem">
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Trang chủ</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Giới thiệu</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/list-food" class="nav-link">
+                                    <span style="font-size: 14px">Sản phẩm</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Khuyến mãi</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Tin tức</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="nav-link">
+                                    <span style="font-size: 14px">Liên hệ</span>
+                                </a>
+                            </li>
+
+                            <li class="dropdown">
+                                <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px">
+                                    Tài khoản
+                                </span>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link ps-3" href="/SignUp" style="font-size: 14px;"><span>Đăng ký</span></a></li>
+                                    <li><a class="nav-link ps-3" href="Login" style="font-size: 14px">Đăng nhập</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div style="padding: 30px 0;">
+            <div class="container">
+                <div class="row">
+                    @* ảnh logo *@
+                    <div class="col-3">
+                        <div class="text-center">
+                            <a href="#">
+                                <img src="https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/logo.jpg?1676015641182" />
+                            </a>
+                        </div>
+                    </div>
+
+                    @* thông tin mở, email, phoneNumber *@
+                    <div class="col-9 d-flex justify-content-end gap-3">
+                        <div class="d-flex gap-2">
+                            <div style="width: 4.0625rem; height: 4.0625rem; background-color: #f2b94c; border-radius: 50%; text-align: center; line-height: 4.0625rem">
+                                <i class="fa-solid fa-clock" style="color: #ffffff; font-size: 1.4rem"></i>
+                            </div>
+                            <div>
+                                <span style="color: #c69c6d; margin-top: 0.625rem; text-transform: uppercase; font-size: 14px; display: block">Open:</span>
+                                <span style="font-size: 18px; font-weight: 300; display: block; color: #603913;">8 AM - 10 PM</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <div style="width: 4.0625rem; height: 4.0625rem; background-color: #f2b94c; border-radius: 50%; text-align: center; line-height: 4.0625rem">
+                                <i class="fa-solid fa-envelope" style="color: #ffffff; font-size: 1.4rem"></i>
+                            </div>
+
+                            <div>
+                                <span style="color: #c69c6d; margin-top: 0.625rem; text-transform: uppercase; font-size: 14px; display: block">Email:</span>
+                                <span style="font-size: 18px; font-weight: 300; display: block; color: #603913;">bigFood@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <div style="width: 4.0625rem; height: 4.0625rem; background-color: #f2b94c; border-radius: 50%; text-align: center; line-height: 4.0625rem">
+                                <i class="fa-solid fa-phone" style="color: #ffffff; font-size: 1.4rem"></i>
+                            </div>
+
+                            <div>
+                                <span style="color: #c69c6d; margin-top: 0.625rem; text-transform: uppercase; font-size: 14px; display: block">Hotline:</span>
+                                <span style="font-size: 18px; font-weight: 300; display: block; color: #603913;">0912888999</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+@* menu lớn *@
+<div style="padding: 30px 0; position: sticky; position: -webkit-sticky; top: 0; background-color: #fdfaf5; z-index: 1">
+    <div class="container">
+        <div class="row align-items-center">
+            @* menu *@
+            <div class="col-10">
+                <div>
+                    <ul class="d-flex justify-content-star gap-5 align-items-center m-0 p-0">
+                        <li class="me-4">
+                            <a href="#" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Trang chủ</span>
+                            </a>
+                        </li>
+
+                        <li class="me-4">
+                            <a href="#" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Giới thiệu</span>
+                            </a>
+                        </li>
+
+                        <li class="me-4">
+                            <a href="/list-food" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Sản phẩm</span>
+                            </a>
+                        </li>
+
+                        <li class="me-4">
+                            <a href="#" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Khuyến mãi</span>
+                            </a>
+                        </li>
+
+                        <li class="me-4">
+                            <a href="#" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Tin tức</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="nav-link">
+                                <span style="font-size: 16px; text-transform: uppercase">Liên hệ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            @* tìm kiếm và giỏ hàng *@
+            <div class="col-2">
+                <div class="d-flex justify-content-end gap-4">
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="rounded-2" style="width: 15rem; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);" />
+                        <i class="fa-solid fa-magnifying-glass" style="color: #603913; margin-left: -1.5rem"></i>
+                    </div>
+
+                    <div>
+                        <a href="/cart">
+                            <i class="fa-solid fa-basket-shopping" style="color: #603913;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main>
+    <MudThemeProvider />
+    <MudPopoverProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    @Body
+</main>
+
+<footer style="background-color: #f8f1e4; padding-top: 1.8rem">
+    <div style="width: 100%; text-align: center">
+        <h2 style="font-size: 16px; text-transform: uppercase; color: #603913; font-weight: 700">Cửa hàng bánh bigfood</h2>
+    </div>
+
+    <div style="margin: 2rem 0;font-size: 14px; color: #603913; width: 100%; text-align: center">
+        <span>Big Food, FPT Polytechnic, Hà Nội</span>
+        <br />
+        <span>Điện thoại: 0912888999 Email: bigFood@gmail.com</span>
+    </div>
+
+    <div>
+        <ul class="d-flex justify-content-center gap-3 m-0 p-0" style="font-size: 30px">
+            <li><i class="fa-brands fa-facebook" style="color: #603913;"></i></li>
+
+            <li><i class="fa-brands fa-square-instagram" style="color: #603913;"></i></li>
+
+            <li><i class="fa-brands fa-twitter" style="color: #603913;"></i></li>
+
+            <li><i class="fa-brands fa-youtube" style="color: #603913;"></i></li>
+        </ul>
+    </div>
+
+    <div style="width: 100%; border: 1px solid rgba(0, 0, 0, 0.3); margin: 3rem 0; margin: 3rem auto" class="container"></div>
+
+    <div style="padding-bottom: .7rem">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <span>© Bản quyền thuộc về</span>
+                    <span style="color: #f2b94c">XPK4 Team</span>
+                    <span>| Cung cấp bởi</span>
+                    <span style="color: #f2b94c">PacNe</span>
+                </div>
+
+                <div>
+                    <img src="https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/payment.jpg?1676015641182" width="100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+

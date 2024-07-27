@@ -1,0 +1,94 @@
+﻿@page "/Admin/CustomerManager"
+
+@layout Layout.AdminLayout
+
+@inject IDialogService DialogService
+
+<div style="padding: 20px; background-color: #fafafa; height: calc(100vh - 64px)">
+    <MudPaper Style="padding: 15px">
+        <MudText Style="font-size: 22px; font-weight: bold; text-transform: uppercase">Quản lý khách hàng</MudText>
+    </MudPaper>
+
+    <MudGrid Style="padding: 2rem 0">
+        <MudItem xl="10" lg="10" md="8" sm="6" xs="12"></MudItem>
+        <MudItem xl="2" lg="2" md="4" sm="6" xs="12">
+            <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "create"))" Style="background-color: #333; color: #fff; width: 100%">Thêm mới</MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Style="">
+        <MudItem xl="12" lg="12" md="12" sm="12" xs="12">
+            <MudTable Items="@lst" Dense="true" Hover="true" Virtualize="true" FixedHeader="true" HorizontalScrollbar="true" Height="600px">
+                <ToolBarContent>
+                    <MudText Style="font-size: 22px; font-weight: bold">Khách hàng</MudText>
+                    <MudSpacer />
+                    <MudTextField T="string" Placeholder="Search" Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Họ tên</MudTh>
+                    <MudTh>Ngày sinh</MudTh>
+                    <MudTh>Số điện thoại</MudTh>
+                    <MudTh>Lớp</MudTh>
+                    <MudTh>Thao tác</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Họ tên">@context.name</MudTd>
+                    <MudTd DataLabel="Ngày sinh">@context.dob</MudTd>
+                    <MudTd DataLabel="Số điện thoại">@context.phoneNumber</MudTd>
+                    <MudTd DataLabel="Lớp">@context.role</MudTd>
+                    <MudTd DataLabel="Thao tác">
+                        <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "details"))">
+                            <svg viewBox="0 0 1024 1024" width="20px" height="20px" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M320 89.6h640v76.8H320V89.6z m0 768h640v76.8H320v-76.8z m-256-768h128v76.8H64V89.6z m256 384h640v76.8H320V473.6z m-256 0h128v76.8H64V473.6z m0 384h128v76.8H64v-76.8z" fill="#29a69a"></path></g></svg>
+                        </MudButton>
+
+                        <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "update"))">
+                            <svg viewBox="0 0 48 48" fill="none" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" stroke="#daa520"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M17 14L29 14" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M23 28L23 15" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20.1429 42H8C6.89543 42 6 41.1046 6 40V7C6 5.89543 6.89543 5 8 5H40C41.1046 5 42 5.89543 42 7V16.7167" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M27 38L37.5 23.5L42 27L31 42H27V38Z" fill="#ffffff" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </MudButton>
+
+                        <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "delete"))">
+                            <svg viewBox="0 -0.5 21 21" width="20px" height="20px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>delete [#ff0000f0000]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -360.000000)" fill="#ff0000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M130.35,216 L132.45,216 L132.45,208 L130.35,208 L130.35,216 Z M134.55,216 L136.65,216 L136.65,208 L134.55,208 L134.55,216 Z M128.25,218 L138.75,218 L138.75,206 L128.25,206 L128.25,218 Z M130.35,204 L136.65,204 L136.65,202 L130.35,202 L130.35,204 Z M138.75,204 L138.75,200 L128.25,200 L128.25,204 L123,204 L123,206 L126.15,206 L126.15,220 L140.85,220 L140.85,206 L144,206 L144,204 L138.75,204 Z" id="delete-[#ff0000f0000]"> </path> </g> </g> </g> </g></svg>
+                        </MudButton>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
+</div>
+
+@code {
+    public record items(string name, DateTime dob, string phoneNumber, string role);
+
+    public List<items> lst = new List<items>();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            lst.Add(new items($"value{i}", DateTime.Now, $"value{i}", $"value{i}"));
+        }
+    }
+    private readonly DialogOptions _maxWidth = new() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+    private Task OpenDialogAsync(DialogOptions options, string name)
+    {
+        if (name.Equals("create"))
+        {
+            return DialogService.ShowAsync<Dialog.Customer.CreateDialog>("Create Customer Dialog", options);
+        }
+        else if (name.Equals("update"))
+        {
+            return DialogService.ShowAsync<Dialog.Customer.UpdateDialog>("Update Customer Dialog", options);
+        }
+        else if (name.Equals("details"))
+        {
+            return DialogService.ShowAsync<Dialog.Customer.DetailDialog>("Details Customer Dialog", options);
+        }
+        else
+        {
+            return DialogService.ShowAsync<Dialog.Customer.DeleteDialog>("Delete Customer Dialog", options);
+        }
+
+
+    }
+}
