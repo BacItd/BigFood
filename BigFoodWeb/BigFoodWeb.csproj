@@ -20,10 +20,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MudBlazor" Version="7.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Component\Pages\Access\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BigFoodData\BigFoodData.csproj" />
   </ItemGroup>
 
 </Project>
