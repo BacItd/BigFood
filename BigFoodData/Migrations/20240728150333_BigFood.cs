@@ -97,7 +97,7 @@ namespace BigFoodData.Migrations
                     QuantitySold = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<byte>(type: "tinyint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    SaleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SaleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,8 +112,7 @@ namespace BigFoodData.Migrations
                         name: "FK_Foods_Sales_SaleId",
                         column: x => x.SaleId,
                         principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

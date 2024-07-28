@@ -36,7 +36,7 @@ namespace BigFoodData.Models
 
         public int CategoryId { get; set; }
 
-        public Guid SaleId { get; set; }
+        public Guid? SaleId { get; set; }
 
         public virtual Category? Category { get; set; }
 

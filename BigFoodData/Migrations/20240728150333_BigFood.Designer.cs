@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigFoodData.Migrations
 {
     [DbContext(typeof(BigFoodDbContext))]
-    [Migration("20240728145007_BigFood")]
+    [Migration("20240728150333_BigFood")]
     partial class BigFood
     {
         /// <inheritdoc />
@@ -192,7 +192,7 @@ namespace BigFoodData.Migrations
                     b.Property<int?>("QuantitySold")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SaleId")
+                    b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte>("Status")
@@ -359,9 +359,7 @@ namespace BigFoodData.Migrations
 
                     b.HasOne("BigFoodData.Models.Sale", "Sale")
                         .WithMany("Food")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SaleId");
 
                     b.Navigation("Category");
 
