@@ -12,21 +12,21 @@ namespace BigFoodAPI.Controllers
         BigFoodDbContext _context = new BigFoodDbContext();
 
         [HttpGet("Get-All")]
-        public ActionResult<List<Food>> GetAllFood()
+        public ActionResult GetAllFood()
         {
             var lst = _context.Foods.ToList();
             return Ok(lst);
         }
 
         [HttpGet("Get-By-Id")]
-        public  ActionResult<Food> GetFoodById(Guid id)
+        public  ActionResult GetFoodById(Guid id)
         {
             var obj = _context.Foods.Find(id);
             return Ok(obj);
         }
 
         [HttpPost("Create")]
-        public ActionResult<Food> CreateFood(Food food)
+        public ActionResult CreateFood(Food food)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace BigFoodAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public  ActionResult<Food> UpdateFood(Food food)
+        public  ActionResult UpdateFood(Food food)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace BigFoodAPI.Controllers
         }
 
         [HttpDelete("Delete")]
-        public ActionResult<Food> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
             try
             {

@@ -16,6 +16,6 @@ namespace BigFoodData.Models
 
         public byte Status { get; set; }
 
-        public virtual ICollection<Food> Food { get; set; }
+        public virtual ICollection<Food>? Food { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace BigFoodData.Models
 
         public double PriceCurrent { get; set; }
 
-        public double PriceSale { get; set; }
+        public double? PriceSale { get; set; }
 
         public int BillId { get; set; }
 

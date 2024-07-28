@@ -22,6 +22,6 @@ namespace BigFoodData.Models
 
         public virtual User? User { get; set; }
 
-        public virtual ICollection<BillDtail> BillDetail { get; set; }
+        public virtual ICollection<BillDtail>? BillDetail { get; set; }
     }
 }

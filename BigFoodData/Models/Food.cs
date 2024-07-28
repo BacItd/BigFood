@@ -14,23 +14,23 @@ namespace BigFoodData.Models
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public DateTime DateCreate { get; set; }
 
-        public string Ingredient { get; set; }
+        public string? Ingredient { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         public string QrCode { get; set; }
 
         public double PriceCurrent { get; set; }
 
-        public double PriceSale { get; set; }
+        public double? PriceSale { get; set; }
 
         public int Quantity { get; set; }
 
-        public int QuantitySold { get; set; }
+        public int? QuantitySold { get; set; }
 
         public byte Status { get; set; }
 
@@ -42,6 +42,6 @@ namespace BigFoodData.Models
 
         public virtual Sale? Sale { get; set; }
 
-        public virtual ICollection<BillDtail> BillDetail { get; set; }
+        public virtual ICollection<BillDtail>? BillDetail { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace BigFoodData.Migrations
                     b.Property<double>("PriceCurrent")
                         .HasColumnType("float");
 
-                    b.Property<double>("PriceSale")
+                    b.Property<double?>("PriceSale")
                         .HasColumnType("float");
 
                     b.Property<int>("Quantity")
@@ -161,15 +161,12 @@ namespace BigFoodData.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredient")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -179,7 +176,7 @@ namespace BigFoodData.Migrations
                     b.Property<double>("PriceCurrent")
                         .HasColumnType("float");
 
-                    b.Property<double>("PriceSale")
+                    b.Property<double?>("PriceSale")
                         .HasColumnType("float");
 
                     b.Property<string>("QrCode")
@@ -189,7 +186,7 @@ namespace BigFoodData.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuantitySold")
+                    b.Property<int?>("QuantitySold")
                         .HasColumnType("int");
 
                     b.Property<Guid>("SaleId")
@@ -260,11 +257,10 @@ namespace BigFoodData.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("accumulatepoint")
+                    b.Property<int?>("accumulatepoint")
                         .HasColumnType("int");
 
                     b.Property<string>("address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")

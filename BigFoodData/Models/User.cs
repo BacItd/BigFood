@@ -18,11 +18,11 @@ namespace BigFoodData.Models
 
         public string phoneNumber { get; set; }
 
-        public string address { get; set; }
+        public string? address { get; set; }
 
         public string userName { get; set; }
 
-        public int accumulatepoint { get; set; }
+        public int? accumulatepoint { get; set; }
 
         public byte status { get; set; }
 
@@ -34,6 +34,6 @@ namespace BigFoodData.Models
 
         public virtual Role? Role { get; set; }
 
-        public virtual ICollection<Bill> Bill { get; set; }
+        public virtual ICollection<Bill>? Bill { get; set; }
     }
 }
