@@ -3,13 +3,45 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Chi tiết đồ ăn</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
-            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
-            <MudTextField Style="padding: 0" T="string" Label="Email" />
-            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
-            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
-        </MudForm>
+        @if (Foods == null)
+        {
+            <MudText>Loading...</MudText>
+        }
+        else
+        {
+            <MudForm Spacing="5">
+                <MudGrid Style="padding: 0; width: 100%">
+                    <MudItem xl="6" Style="padding: 0; width: 100%">
+                        <MudPaper Style="background-color: transparent; box-shadow: none">
+                            <MudImage Style="width: 100%" Src="@Foods.ImageUrl" />
+                        </MudPaper>
+                    </MudItem>
+                    <MudItem xl="6" Style="padding: 0; width: 100%">
+                        <MudPaper Style="background-color: transparent; box-shadow: none">
+                            <MudImage Style="width: 100%" Src="@Foods.QrCode" />
+                        </MudPaper>
+                    </MudItem>
+                </MudGrid>
+                <MudTextField Style="padding: 0" T="string" Label="Tên đồ ăn" Value="@Foods.Name" ReadOnly=true />
+                <MudTextField Style="padding: 0" T="string" Label="Nguyên liệu" Value="@Foods.Ingredient" ReadOnly=true />
+                <MudTextField Style="padding: 0" T="string" Label="Thể loại" Value="@Foods.CategoryId.ToString()" ReadOnly=true />
+                <MudDatePicker Style="padding: 0" Label="Ngày tạo" @bind-Date="DateTimeByFood" ReadOnly=true DateFormat="dd.MM.yyyy" />
+                <MudNumericField Style="padding: 0" Label="Giá bán" Value="@Foods.PriceCurrent" ReadOnly=true />
+                <MudNumericField Style="padding: 0" Label="Giảm giá" Value="@Foods.PriceSale" ReadOnly=true />
+                <MudNumericField Style="padding: 0" Label="Số lượng" Value="@Foods.Quantity" ReadOnly=true />
+                <MudNumericField Style="padding: 0" Label="Số lượng đã bán" Value="@Foods.QuantitySold" ReadOnly=true />
+                @if (Foods.Status == 1)
+                {
+
+                    <MudRadio Dense="true" Color="Color.Primary" Value="true">Hoạt động</MudRadio>
+                }
+                else if (Foods.Status == 2)
+                {
+
+                    <MudRadio Dense="true" Color="Color.Secondary" Value="true">Không hoạt động</MudRadio>
+                }
+            </MudForm>
+        }
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
@@ -21,4 +53,17 @@
     private MudDialogInstance MudDialog { get; set; }
 
     private void Cancel() => MudDialog.Cancel();
+
+    [Parameter]
+    public string IdFood { get; set; }
+
+    private DateTime? DateTimeByFood;
+
+    private Food? Foods { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Foods = await FoodServices.GetById(Guid.Parse(IdFood));
+        DateTimeByFood = Foods.DateCreate.Date;
+    }
 }

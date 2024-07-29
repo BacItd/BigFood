@@ -15,18 +15,14 @@ namespace BigFoodWeb.Services
 
         public async Task<List<Food>> GetAllFood()
         {
-            var allFood = await _httpClient.GetAsync("https://localhost:7240/Food/Get-All");
-            var response = await allFood.Content.ReadFromJsonAsync<List<Food>>();
-            return response;
+            var lst = await _httpClient.GetFromJsonAsync<List<Food>>("Food/Get-All");
+            return lst;
         }
 
-        public Food GetById(Guid id)
+        public async Task<Food> GetById(Guid id)
         {
-            string url = $"https://localhost:7240/Food/Get-By-Id?id={id}";
-            var response = _httpClient.GetStringAsync(url).Result;
-            Food obj = JsonConvert.DeserializeObject<Food>(response);
-
-            return obj;
+            var obj1 = await _httpClient.GetFromJsonAsync<Food>($"Food/Get-By-Id?id={id}");
+            return obj1;
         }
 
         public bool Create(Food food)
