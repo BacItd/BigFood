@@ -34,7 +34,13 @@
         var delCategory = await categoryServices.DeleteCategory(Convert.ToInt32(CategoryId));
         if (delCategory == true)
         {
-            NavigationManager.NavigateTo("Admin/CategoryManager", true);
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thất bại", Severity.Error);
         }
     }
 

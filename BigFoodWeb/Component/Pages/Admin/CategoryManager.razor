@@ -35,16 +35,14 @@
                     <MudTd DataLabel="Mã" hidden>@context.Id</MudTd>
                     <MudTd DataLabel="Tên thể loại">@context.Name</MudTd>
                     <MudTd DataLabel="Trạng thái">
-                        <MudTd>
-                            @if (context.Status == 1)
-                            {
-                                <MudText Style="color: #29a69a">Hoạt động</MudText>
-                            }
-                            else
-                            {
-                                <MudText Style="color: red">Không hoạt động</MudText>
-                            }
-                        </MudTd>
+                        @if (context.Status == 1)
+                        {
+                            <MudText Style="color: #29a69a; background-color: transparent">Hoạt động</MudText>
+                        }
+                        else
+                        {
+                            <MudText Style="color: red;  background-color: transparent">Không hoạt động</MudText>
+                        }
                     </MudTd>
                     <MudTd DataLabel="Thao tác">
                         <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "update", context.Id.ToString()))">
@@ -69,9 +67,14 @@
         Categories = await categoryServices.GetAllCategory();
     }
 
+    private async Task loadData()
+    {
+        Categories = await categoryServices.GetAllCategory();
+    }
+
     private readonly DialogOptions _maxWidth = new() { MaxWidth = MaxWidth.Small, FullWidth = true };
 
-    private Task OpenDialogAsync(DialogOptions options, string name, string? categoryId)
+    private async Task OpenDialogAsync(DialogOptions options, string name, string? categoryId)
     {
         var dialogParametersDel = new DialogParameters<Dialog.Category.DeleteDialog>
         {
@@ -85,15 +88,31 @@
 
         if (name.Equals("create"))
         {
-            return DialogService.ShowAsync<Dialog.Category.CreateDialog>("Create Category Dialog", options);
+            var dialog = await DialogService.ShowAsync<Dialog.Category.CreateDialog>("Create Category Dialog", options); ;
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                await loadData();
+            }
         }
         else if (name.Equals("update"))
         {
-            return DialogService.ShowAsync<Dialog.Category.UpdateDialog>("Update Category Dialog", dialogParametersUpdate, options);
+            var dialog = await DialogService.ShowAsync<Dialog.Category.UpdateDialog>("Update Category Dialog", dialogParametersUpdate, options);
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                await loadData();
+            }
+
         }
         else
         {
-            return DialogService.ShowAsync<Dialog.Category.DeleteDialog>("Delete Category Dialog", dialogParametersDel, options);
+            var dialog = await DialogService.ShowAsync<Dialog.Category.DeleteDialog>("Delete Category Dialog", dialogParametersDel, options);
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                await loadData();
+            }
         }
 
 

@@ -54,8 +54,15 @@
         var update = await categoryServices.UpdateCategory(category);
         if(update == true)
         {
-            NavigationManager.NavigateTo("/Admin/CategoryManager", true);
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Sửa thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Sửa thất bại", Severity.Error);
         }
     }
     private void Cancel() => MudDialog.Cancel();
+
 }
