@@ -1,0 +1,42 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Xóa thể loại</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>Bạn chắc chắn muốn xóa @category?.Name ?</MudText>
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="Submit">Xóa</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string CategoryId { get; set; }
+
+    private Category? category;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (CategoryId != null)
+        {
+            category = await categoryServices.GetCategoryById(Convert.ToInt32(CategoryId));
+        }
+    }
+
+    private async void Submit()
+    {
+        var delCategory = await categoryServices.DeleteCategory(Convert.ToInt32(CategoryId));
+        if (delCategory == true)
+        {
+            NavigationManager.NavigateTo("Admin/CategoryManager", true);
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

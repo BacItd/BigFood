@@ -1,0 +1,42 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Thêm mới thể loại</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Spacing="5" Model="@Category" @ref="@form">
+            <MudTextField @bind-Value="Category.Name" For="@(() => Category.Name)" Style="padding: 0" T="string" Label="Tên thể loại" />
+            <MudRadioGroup @bind-Value="StatusCategory">
+                <MudRadio Dense="true" Value="@("1")">Hoạt động</MudRadio>
+                <MudRadio Value="@("2")">Không hoạt động</MudRadio>
+            </MudRadioGroup>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Thêm mới</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    MudForm form;
+
+    private Category Category { get; set; } = new();
+
+    private string StatusCategory { get; set; }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private async void Submit()
+    {
+        Category.Status = Convert.ToByte(StatusCategory);
+        var check = await categoryServices.CreateCategory(Category);
+        if(check == true)
+        {
+            NavigationManager.NavigateTo("Admin/CategoryManager");
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,61 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Sửa thể loại</MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (category == null)
+        {
+            <MudText>Loading...</MudText>
+        }
+        else
+        {
+            <MudForm Model="@category" @ref="form" Spacing="5">
+                <MudNumericField Style="padding: 0" Label="Mã thể loại" ReadOnly="true" @bind-Value="category.Id" For="@(() => category.Id)" />
+                <MudTextField Style="padding: 0" T="string" Label="Tên thể loại" @bind-Value="category.Name" For="@(() => category.Name)" />
+                <MudRadioGroup @bind-Value="StatusCategory">
+                    <MudRadio Value="@("1")">Hoạt động</MudRadio>
+                    <MudRadio Value="@("2")">Không hoạt động</MudRadio>
+                </MudRadioGroup>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Warning" OnClick="Submit">Cập nhật</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string CategoryId { get; set; }
+
+    private Category? category;
+
+
+    private string StatusCategory { get; set; }
+
+    MudForm form;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (CategoryId != null)
+        {
+            category = await categoryServices.GetCategoryById(Convert.ToInt32(CategoryId));
+        }
+    }
+
+    private async void Submit()
+    {
+        category.Status = Convert.ToByte(StatusCategory);
+        var update = await categoryServices.UpdateCategory(category);
+        if(update == true)
+        {
+            NavigationManager.NavigateTo("/Admin/CategoryManager", true);
+        }
+    }
+    private void Cancel() => MudDialog.Cancel();
+}

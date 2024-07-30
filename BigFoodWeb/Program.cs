@@ -15,5 +15,6 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7240/") });
 
 builder.Services.AddScoped<FoodServices>();
+builder.Services.AddScoped<CategoryServices>();
 
 await builder.Build().RunAsync();

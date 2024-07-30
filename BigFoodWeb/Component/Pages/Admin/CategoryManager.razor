@@ -1,62 +1,52 @@
-﻿@page "/Admin/FoodManager"
+﻿@page "/Admin/CategoryManager"
 
 @layout Layout.AdminLayout
+
 @inject IDialogService DialogService
-@inject IJSRuntime JsRuntime
 
 <div style="padding: 20px; background-color: #fafafa; height: calc(100vh - 64px)">
     <MudPaper Style="padding: 15px">
-        <MudText Style="font-size: 22px; font-weight: bold; text-transform: uppercase">Quản lý món ăn</MudText>
+        <MudText Style="font-size: 22px; font-weight: bold; text-transform: uppercase">Quản lý thể loại</MudText>
     </MudPaper>
 
     <MudGrid Style="padding: 2rem 0">
         <MudItem xl="10" lg="10" md="8" sm="6" xs="12"></MudItem>
         <MudItem xl="2" lg="2" md="4" sm="6" xs="12">
-            <MudButton Style="background-color: #333; color: #fff; width: 100%" OnClick="@(() => OpenDialogAsync(_maxWidth, "create", null))">Thêm mới</MudButton>
+            <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "create", null))" Style="background-color: #333; color: #fff; width: 100%">Thêm mới</MudButton>
         </MudItem>
     </MudGrid>
 
     <MudGrid Style="">
         <MudItem xl="12" lg="12" md="12" sm="12" xs="12">
-            <MudTable Items="@Foods" Dense="true" Hover="true" Virtualize="true" FixedHeader="true" HorizontalScrollbar="true" Height="600px">
+            <MudTable Items="@Categories" Dense="true" Hover="true" Virtualize="true" FixedHeader="true" HorizontalScrollbar="true" Height="600px">
                 <ToolBarContent>
-                    <MudText Style="font-size: 22px; font-weight: bold">Đồ ăn</MudText>
+                    <MudText Style="font-size: 22px; font-weight: bold">Thể loại</MudText>
                     <MudSpacer />
                     <MudTextField T="string" Placeholder="Search" Adornment="Adornment.Start"
                                   AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh>Ảnh</MudTh>
-                    <MudTh>Tên món ăn</MudTh>
-                    <MudTh>Thể loại</MudTh>
-                    <MudTh>Giá bán</MudTh>
-                    <MudTh>Số lượng</MudTh>
+                    <MudTh hidden>Mã</MudTh>
+                    <MudTh>Tên thể loại</MudTh>
                     <MudTh>Trạng thái</MudTh>
                     <MudTh>Thao tác</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="Họ tên">@context.ImageUrl</MudTd>
-                    <MudTd DataLabel="Ngày sinh">@context.Name</MudTd>
-                    <MudTd DataLabel="Số điện thoại">@context.CategoryId</MudTd>
-                    <MudTd DataLabel="Số điện thoại">@context.PriceCurrent</MudTd>
-                    <MudTd DataLabel="Lớp">@context.Quantity</MudTd>
-
-                    <MudTd>
-                        @if (context.Status == 1)
-                        {
-                            <MudText Style="color: #29a69a">Hoạt động</MudText>
-                        }
-                        else
-                        {
-                            <MudText Style="color: red">Không hoạt động</MudText>
-                        }
+                    <MudTd DataLabel="Mã" hidden>@context.Id</MudTd>
+                    <MudTd DataLabel="Tên thể loại">@context.Name</MudTd>
+                    <MudTd DataLabel="Trạng thái">
+                        <MudTd>
+                            @if (context.Status == 1)
+                            {
+                                <MudText Style="color: #29a69a">Hoạt động</MudText>
+                            }
+                            else
+                            {
+                                <MudText Style="color: red">Không hoạt động</MudText>
+                            }
+                        </MudTd>
                     </MudTd>
-                   
                     <MudTd DataLabel="Thao tác">
-                        <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "details", context.Id.ToString()))">
-                            <svg viewBox="0 0 1024 1024" width="20px" height="20px" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M320 89.6h640v76.8H320V89.6z m0 768h640v76.8H320v-76.8z m-256-768h128v76.8H64V89.6z m256 384h640v76.8H320V473.6z m-256 0h128v76.8H64V473.6z m0 384h128v76.8H64v-76.8z" fill="#29a69a"></path></g></svg>
-                        </MudButton>
-
                         <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "update", context.Id.ToString()))">
                             <svg viewBox="0 0 48 48" fill="none" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" stroke="#daa520"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M17 14L29 14" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M23 28L23 15" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20.1429 42H8C6.89543 42 6 41.1046 6 40V7C6 5.89543 6.89543 5 8 5H40C41.1046 5 42 5.89543 42 7V16.7167" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M27 38L37.5 23.5L42 27L31 42H27V38Z" fill="#ffffff" stroke="# DAA520" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                         </MudButton>
@@ -72,38 +62,38 @@
 </div>
 
 @code {
-    private List<Food>? Foods;
+    private List<Category> Categories;
 
-    protected override async Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
-        Foods = await FoodServices.GetAllFood();
+        Categories = await categoryServices.GetAllCategory();
     }
 
     private readonly DialogOptions _maxWidth = new() { MaxWidth = MaxWidth.Small, FullWidth = true };
 
-
-
-    private Task OpenDialogAsync(DialogOptions options, string name, string? IdFood)
+    private Task OpenDialogAsync(DialogOptions options, string name, string? categoryId)
     {
-        var dialogParameters = new DialogParameters<Dialog.Food.DetailFoodDialog>
+        var dialogParametersDel = new DialogParameters<Dialog.Category.DeleteDialog>
         {
-            {x => x.IdFood, IdFood}
+            {x => x.CategoryId, categoryId}
         };
+
+        var dialogParametersUpdate = new DialogParameters<Dialog.Category.UpdateDialog>
+        {
+            {x => x.CategoryId, categoryId}
+        };
+
         if (name.Equals("create"))
         {
-            return DialogService.ShowAsync<Dialog.Food.CreateFoodDialog>("Create Food Dialog", options);
+            return DialogService.ShowAsync<Dialog.Category.CreateDialog>("Create Category Dialog", options);
         }
         else if (name.Equals("update"))
         {
-            return DialogService.ShowAsync<Dialog.Food.UpdateFoodDialog>("Update Food Dialog", dialogParameters, options);
-        }
-        else if (name.Equals("details"))
-        {
-            return DialogService.ShowAsync<Dialog.Food.DetailFoodDialog>("Details Food Dialog", dialogParameters, options);
+            return DialogService.ShowAsync<Dialog.Category.UpdateDialog>("Update Category Dialog", dialogParametersUpdate, options);
         }
         else
         {
-            return DialogService.ShowAsync<Dialog.Food.DeleteFoodDialog>("Delete Food Dialog", dialogParameters, options);
+            return DialogService.ShowAsync<Dialog.Category.DeleteDialog>("Delete Category Dialog", dialogParametersDel, options);
         }
 
 
