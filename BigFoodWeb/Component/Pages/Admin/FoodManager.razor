@@ -26,21 +26,21 @@
                                   AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh>Họ tên</MudTh>
-                    <MudTh>Ngày sinh</MudTh>
-                    <MudTh>Số điện thoại</MudTh>
-                    <MudTh>Lớp</MudTh>
-                    <MudTh>Thao tác</MudTh>
-                    <MudTh>Thao tác</MudTh>
+                    <MudTh>Ảnh</MudTh>
+                    <MudTh>Tên món ăn</MudTh>
+                    <MudTh>Thể loại</MudTh>
+                    <MudTh>Giá bán</MudTh>
+                    <MudTh>Số lượng</MudTh>
+                    <MudTh>Trạng thái</MudTh>
                     <MudTh>Thao tác</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="Họ tên">@context.Name</MudTd>
-                    <MudTd DataLabel="Ngày sinh">@context.Ingredient</MudTd>
+                    <MudTd DataLabel="Họ tên">@context.ImageUrl</MudTd>
+                    <MudTd DataLabel="Ngày sinh">@context.Name</MudTd>
+                    <MudTd DataLabel="Số điện thoại">@context.CategoryId</MudTd>
                     <MudTd DataLabel="Số điện thoại">@context.PriceCurrent</MudTd>
-                    <MudTd DataLabel="Số điện thoại">@context.PriceSale</MudTd>
                     <MudTd DataLabel="Lớp">@context.Quantity</MudTd>
-                    <MudTd DataLabel="Lớp">@context.QuantitySold</MudTd>
+                    <MudTd DataLabel="Lớp">@context.Status</MudTd>
                     <MudTd DataLabel="Thao tác">
                         <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "details", context.Id.ToString()))">
                             <svg viewBox="0 0 1024 1024" width="20px" height="20px" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M320 89.6h640v76.8H320V89.6z m0 768h640v76.8H320v-76.8z m-256-768h128v76.8H64V89.6z m256 384h640v76.8H320V473.6z m-256 0h128v76.8H64V473.6z m0 384h128v76.8H64v-76.8z" fill="#29a69a"></path></g></svg>
