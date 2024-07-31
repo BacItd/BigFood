@@ -43,7 +43,14 @@
                     <MudTd DataLabel="Địa chỉ">@context.address</MudTd>
                     <MudTd DataLabel="Tích điểm">@context.accumulatepoint</MudTd>
                     <MudTd DataLabel="Trạng thái">
-
+                        @if(context.status == 1)
+                        {
+                            <MudText Style="color: #29a69a">Hoạt Động</MudText>
+                        }
+                        else
+                        {
+                            <MudText Style="color: red">Không Hoạt Động</MudText>
+                        }
                     </MudTd>
                     <MudTd DataLabel="Thao tác">
                         <MudButton OnClick="@(() => OpenDialogAsync(_maxWidth, "details", context.Id.ToString()))">

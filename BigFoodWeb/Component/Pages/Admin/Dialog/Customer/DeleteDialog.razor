@@ -3,7 +3,7 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Xóa khách hàng</MudText>
     </TitleContent>
     <DialogContent>
-        <MudText>Bạn chắc chắn muốn xóa?</MudText>
+        <MudText>Bạn chắc chắn muốn xóa @user?.name?</MudText>
     </DialogContent>
     <DialogActions>
 
@@ -19,7 +19,27 @@
     [Parameter]
     public string userId { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    private User? user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await userServices.GetUserById(Guid.Parse(userId));
+    }
+
+    private async void Submit()
+    {
+        var check = await userServices.DeleteUser(Guid.Parse(userId));
+        if(check == true)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thất bại", Severity.Error);
+        }
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }

@@ -64,6 +64,7 @@ namespace BigFoodAPI.Controllers
                 obj.userName = user.userName;
                 obj.accumulatepoint = user.accumulatepoint;
                 obj.RoleId = user.RoleId;
+                obj.status = user.status;
 
                 _context.Users.Update(obj);
                 _context.SaveChanges();

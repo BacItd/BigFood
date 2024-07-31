@@ -3,13 +3,22 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Sửa khách hàng</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
-            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
-            <MudTextField Style="padding: 0" T="string" Label="Email" />
-            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
-            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
-        </MudForm>
+        @if (user != null)
+        {
+            <MudForm Spacing="5" Model="@user">
+                <MudTextField Style="padding: 0" T="string" Label="Họ và tên" @bind-Value="@user.name" For="@(() => user.name)"/>
+                <MudTextField Style="padding: 0" T="string" Label="Email" @bind-Value="@user.email" For="@(() => user.email)" />
+                <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" @bind-Value="@user.phoneNumber" For="@(() => user.phoneNumber)" />
+                <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" @bind-Value="@user.address" For="@(() => user.address)" />
+                <MudTextField Style="padding: 0" T="string" Label="Tên đăng nhập" @bind-Value="@user.userName" For="@(() => user.userName)" ReadOnly=true/>
+                <MudNumericField Style="padding: 0" Label="Điểm tích lũy" @bind-Value="@user.accumulatepoint" For="@(() => user.accumulatepoint)" />
+                <MudTextField Style="padding: 0" T="string" Label="Quyền" Value="@role.Name" ReadOnly=true/>
+                <MudRadioGroup @bind-Value="@statusUser">
+                    <MudRadio Value="1">Hoạt Động</MudRadio>
+                    <MudRadio Value="2">không Hoạt Động</MudRadio>
+                </MudRadioGroup>
+            </MudForm>
+        }
     </DialogContent>
     <DialogActions>
 
@@ -25,7 +34,34 @@
     [Parameter]
     public string userId { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    private User user;
+
+    private Role role;
+
+    private int statusUser = 1; 
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await userServices.GetUserById(Guid.Parse(userId));
+        role = await roleServices.GetRoleById(user.RoleId);
+    }
+
+    private async void Submit()
+    {
+        user.RoleId = role.Id;
+        user.status = Convert.ToByte(statusUser);
+        var check = await userServices.UpdateUser(user);
+        if(check == true)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Cập nhật thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Cập nhật thất bại", Severity.Error);
+        }
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }
