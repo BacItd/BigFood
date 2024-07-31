@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BigFoodAPI.Controllers
 {
-    [Route("Category")]
+    [Route("Sale")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class SaleController : ControllerBase
     {
         BigFoodDbContext _context = new BigFoodDbContext();
 
@@ -15,30 +15,30 @@ namespace BigFoodAPI.Controllers
         {
             if (search == null || search == "")
             {
-                var lst = _context.Categorys.ToList();
+                var lst = _context.Sales.ToList();
                 return Ok(lst);
             }
             else
             {
-                var lstSearch = _context.Categorys.Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList();
+                var lstSearch = _context.Sales.Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList();
                 return Ok(lstSearch);
             }
         }
 
 
         [HttpGet("Get-By-Id")]
-        public ActionResult GetCategoryById(int id)
+        public ActionResult GetById(Guid id)
         {
-            var obj = _context.Categorys.Find(id);
+            var obj = _context.Sales.Find(id);
             return Ok(obj);
         }
 
         [HttpPost("Create")]
-        public ActionResult CreateCategory(Category category)
+        public ActionResult Create(Sale sale)
         {
             try
             {
-                _context.Categorys.Add(category);
+                _context.Sales.Add(sale);
                 _context.SaveChanges();
                 return Ok();
 
@@ -50,16 +50,19 @@ namespace BigFoodAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public ActionResult UpdateCategory(Category category)
+        public ActionResult Update(Sale sale)
         {
             try
             {
-                var obj = _context.Categorys.Find(category.Id);
+                var obj = _context.Sales.Find(sale.Id);
 
-                obj.Name = category.Name;
-                obj.Status = category.Status;
+                obj.Name = sale.Name;
+                obj.PercentSale = sale.PercentSale;
+                obj.StartDate = sale.StartDate;
+                obj.EndDate = sale.EndDate;
+                obj.Status = sale.Status;
 
-                _context.Categorys.Update(obj);
+                _context.Sales.Update(obj);
                 _context.SaveChanges();
                 return Ok();
 
@@ -72,13 +75,13 @@ namespace BigFoodAPI.Controllers
         }
 
         [HttpDelete("Delete")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             try
             {
-                var obj = _context.Categorys.Find(id);
+                var obj = _context.Sales.Find(id);
 
-                _context.Categorys.Remove(obj);
+                _context.Sales.Remove(obj);
                 _context.SaveChanges();
                 return Ok();
             }

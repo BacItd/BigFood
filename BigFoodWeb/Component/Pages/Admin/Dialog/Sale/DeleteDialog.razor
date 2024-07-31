@@ -3,7 +3,10 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Xóa khuyến mãi</MudText>
     </TitleContent>
     <DialogContent>
-        <MudText>Bạn chắc chắn muốn xóa?</MudText>
+        @if (sales != null)
+        {
+            <MudText>Bạn chắc chắn muốn xóa @sales.Name?</MudText>
+        }
     </DialogContent>
     <DialogActions>
 
@@ -16,7 +19,30 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    [Parameter]
+    public string SaleId { get; set; }
+
+    private Sale sales;
+
+    protected override async Task OnInitializedAsync()
+    {
+        sales = await saleServices.GetSaleById(Guid.Parse(SaleId));
+    }
+
+    private async void Submit()
+    {
+        var check = await saleServices.DeleteSale(Guid.Parse(SaleId));
+        if(check == true)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Xóa thất bại", Severity.Error);
+        }
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }

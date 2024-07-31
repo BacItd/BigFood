@@ -22,7 +22,7 @@
                 <ToolBarContent>
                     <MudText Style="font-size: 22px; font-weight: bold">Thể loại</MudText>
                     <MudSpacer />
-                    <MudTextField TextChanged="@(() => Onsearch(TextSearch))" T="string" Placeholder="Search" Adornment="Adornment.Start"
+                    <MudTextField TextChanged="Onsearch" T="string" Placeholder="Search" Adornment="Adornment.Start"
                                   AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" @bind-Value="TextSearch"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
@@ -117,7 +117,8 @@
     }
 
     private string TextSearch { get; set; }
-    private async Task Onsearch(string TextSearch)
+    private async Task Onsearch()
+    
     {
         Categories = await categoryServices.GetAllCategory(TextSearch);
     }

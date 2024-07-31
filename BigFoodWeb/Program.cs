@@ -17,6 +17,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 builder.Services.AddScoped<FoodServices>();
 builder.Services.AddScoped<CategoryServices>();
+builder.Services.AddScoped<SaleServices>();
 
 builder.Services.AddMudServices(config =>
 {

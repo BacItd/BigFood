@@ -3,12 +3,25 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Thêm mới khuyến mãi</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
-            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
-            <MudTextField Style="padding: 0" T="string" Label="Email" />
-            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
-            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
+        <MudForm Spacing="5" Model="@sale" @ref="@form">
+            <MudTextField Style="padding: 0" T="string" Label="Tên" For="@(() => sale.Name)" @bind-Value="sale.Name" />
+            <MudNumericField Style="padding: 0" Label="Phần trăm giảm" For="@(() => sale.PercentSale)" @bind-Value="sale.PercentSale" />
+            <MudGrid Style="padding: 0; width: 100%">
+                <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                    <MudDatePicker Style="padding: 0; width: 100%" Label="Ngày bắt đầu" @bind-Date="StartDate" />
+                </MudItem>
+                <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                    <MudTimePicker Style="padding: 0;  width: 100%" Label="thời gian bắt đầu" @bind-Time="timeStart" />
+                </MudItem>
+            </MudGrid>
+            <MudGrid Style="padding: 0; width: 100%">
+                <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                    <MudDatePicker Style="padding: 0; width: 100%" Label="Ngày kết thúc" @bind-Date="EndDate" />
+                </MudItem>
+                <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                    <MudTimePicker Style="padding: 0; width: 100%" Label="thời gian kết thúc" @bind-Time="timeEnd" />
+                </MudItem>
+            </MudGrid>
         </MudForm>
     </DialogContent>
     <DialogActions>
@@ -22,7 +35,48 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    MudForm form;
+
+    private Sale sale { get; set; } = new();
+
+    DateTime? StartDate;
+    TimeSpan? timeStart;
+    DateTime? EndDate;
+    TimeSpan? timeEnd;
+
+    private async void Submit()
+    {
+        sale.StartDate = (DateTime)(StartDate.Value.Date + timeStart.Value);
+        sale.EndDate = (DateTime)(EndDate.Value.Date + timeEnd.Value);
+        sale.Status = checkStatus();
+        var check = await saleServices.CreateSale(sale);
+        if (check == true)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Thêm thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Thêm thất bại", Severity.Error);
+        }
+    }
+
+    private byte checkStatus()
+    {
+        if (sale.StartDate > DateTime.Now)
+        {
+            return 1;
+        }
+        else if (sale.StartDate <= DateTime.Now && sale.EndDate >= DateTime.Now)
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }
