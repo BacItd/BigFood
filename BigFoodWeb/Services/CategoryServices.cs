@@ -12,9 +12,9 @@ namespace BigFoodWeb.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<Category>> GetAllCategory()
+        public async Task<List<Category>> GetAllCategory(string search)
         {
-            return await _httpClient.GetFromJsonAsync<List<Category>>("Category/Get-All");
+            return await _httpClient.GetFromJsonAsync<List<Category>>($"Category/Get-All?search={search}");
         }
 
         public async Task<Category> GetCategoryById(int id)

@@ -22,8 +22,8 @@
                 <ToolBarContent>
                     <MudText Style="font-size: 22px; font-weight: bold">Thể loại</MudText>
                     <MudSpacer />
-                    <MudTextField T="string" Placeholder="Search" Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudTextField TextChanged="@(() => Onsearch(TextSearch))" T="string" Placeholder="Search" Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" @bind-Value="TextSearch"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh hidden>Mã</MudTh>
@@ -64,12 +64,12 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Categories = await categoryServices.GetAllCategory();
+        Categories = await categoryServices.GetAllCategory(null);
     }
 
     private async Task loadData()
     {
-        Categories = await categoryServices.GetAllCategory();
+        Categories = await categoryServices.GetAllCategory(null);
     }
 
     private readonly DialogOptions _maxWidth = new() { MaxWidth = MaxWidth.Small, FullWidth = true };
@@ -114,7 +114,11 @@
                 await loadData();
             }
         }
+    }
 
-
+    private string TextSearch { get; set; }
+    private async Task Onsearch(string TextSearch)
+    {
+        Categories = await categoryServices.GetAllCategory(TextSearch);
     }
 }

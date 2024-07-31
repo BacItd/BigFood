@@ -8,18 +8,18 @@ namespace BigFoodAPI.Controllers
     [Route("Food")]
     [ApiController]
     public class FoodController : ControllerBase
-    { 
+    {
         BigFoodDbContext _context = new BigFoodDbContext();
 
         [HttpGet("Get-All")]
-        public ActionResult GetAllFood()
+        public ActionResult GetAllFood(string search)
         {
             var lst = _context.Foods.ToList();
             return Ok(lst);
         }
 
         [HttpGet("Get-By-Id")]
-        public  ActionResult GetFoodById(Guid id)
+        public ActionResult GetFoodById(Guid id)
         {
             var obj = _context.Foods.Find(id);
             return Ok(obj);
@@ -43,7 +43,7 @@ namespace BigFoodAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public  ActionResult UpdateFood(Food food)
+        public ActionResult UpdateFood(Food food)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace BigFoodAPI.Controllers
         {
             try
             {
-                var obj =  _context.Foods.Find(id);
+                var obj = _context.Foods.Find(id);
 
                 _context.Foods.Remove(obj);
                 _context.SaveChanges();

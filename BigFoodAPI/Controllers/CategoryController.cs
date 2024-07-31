@@ -11,10 +11,18 @@ namespace BigFoodAPI.Controllers
         BigFoodDbContext _context = new BigFoodDbContext();
 
         [HttpGet("Get-All")]
-        public ActionResult GetAll()
+        public ActionResult GetAll(string? search)
         {
-            var lst = _context.Categorys.ToList();
-            return Ok(lst);
+            if (search == null || search == "")
+            {
+                var lst = _context.Categorys.ToList();
+                return Ok(lst);
+            }
+            else
+            {
+                var lstSearch = _context.Categorys.Where(x => x.Name.Contains(search)).ToList();
+                return Ok(lstSearch);
+            }
         }
 
 
