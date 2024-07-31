@@ -246,8 +246,7 @@ namespace BigFoodData.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
                 table: "Users",
-                column: "RoleId",
-                unique: true);
+                column: "RoleId");
         }
 
         /// <inheritdoc />

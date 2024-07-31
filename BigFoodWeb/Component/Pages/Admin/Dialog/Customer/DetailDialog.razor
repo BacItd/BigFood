@@ -3,13 +3,20 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Chi tiết khách hàng</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
-            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
-            <MudTextField Style="padding: 0" T="string" Label="Email" />
-            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
-            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
-        </MudForm>
+        @if (user != null)
+        {
+            <MudForm Spacing="5" Model="@user">
+                <MudTextField Style="padding: 0" T="string" Label="Họ và tên" Value="@user.name" ReadOnly="true"/>
+                <MudTextField Style="padding: 0" T="string" Label="Email" Value="@user.email" ReadOnly="true" />
+                <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" Value="@user.phoneNumber" ReadOnly="true" />
+                <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" Value="@user.address" ReadOnly="true" />
+                <MudTextField Style="padding: 0" T="string" Label="Tên đăng nhập" Value="@user.userName" ReadOnly="true" />
+                <MudTextField Style="padding: 0" T="string" Label="Password" Value="@user.password" ReadOnly="true" />
+                <MudNumericField Style="padding: 0" Label="Điểm tích lũy" Value="@user.accumulatepoint" ReadOnly="true" />
+                <MudTextField Style="padding: 0" T="string" Label="Quyền" Value="@role.Name" ReadOnly="true" />
+
+            </MudForm>
+        }
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
@@ -19,6 +26,19 @@
 @code {
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string userId { get; set; }
+
+    private User user;
+
+    private Role role;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await userServices.GetUserById(Guid.Parse(userId));
+        role = await roleServices.GetRoleById(user.RoleId);
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }

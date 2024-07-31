@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigFoodData.Migrations
 {
     [DbContext(typeof(BigFoodDbContext))]
-    [Migration("20240728150333_BigFood")]
+    [Migration("20240731181347_BigFood")]
     partial class BigFood
     {
         /// <inheritdoc />
@@ -291,8 +291,7 @@ namespace BigFoodData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId")
-                        .IsUnique();
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -369,8 +368,8 @@ namespace BigFoodData.Migrations
             modelBuilder.Entity("BigFoodData.Models.User", b =>
                 {
                     b.HasOne("BigFoodData.Models.Role", "Role")
-                        .WithOne("User")
-                        .HasForeignKey("BigFoodData.Models.User", "RoleId")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

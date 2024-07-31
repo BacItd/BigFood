@@ -3,12 +3,12 @@
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Thêm mới khách hàng</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" />
-            <MudDatePicker Style="padding: 0" Label="Ngày sinh" />
-            <MudTextField Style="padding: 0" T="string" Label="Email" />
-            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" />
-            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" />
+        <MudForm Spacing="5" Model="@user" @ref="form">
+            <MudTextField Style="padding: 0" T="string" Label="Họ và tên" For="@(() => user.name)" @bind-Value="@user.name" />
+            <MudTextField Style="padding: 0" T="string" Label="Email" For="@(() => user.email)" @bind-Value="@user.email" />
+            <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" For="@(() => user.phoneNumber)" @bind-Value="@user.phoneNumber" />
+            <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" For="@(() => user.address)" @bind-Value="@user.address" />
+            <MudTextField Style="padding: 0" T="string" Label="Password" For="@(() => user.password)" @bind-Value="@user.password" />
         </MudForm>
     </DialogContent>
     <DialogActions>
@@ -22,7 +22,29 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    private User? user { get; set; } = new();
+
+    MudForm form;
+
+    private async void Submit()
+    {
+        user.userName = user.email;
+        user.RoleId = 3;
+        user.status = 1;
+        user.accumulatepoint = 0;
+        var check = await userServices.CreateUser(user);
+        if (check == true)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Thêm thành công", Severity.Success);
+        }
+        else
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+            Snackbar.Add("Thêm thất bại", Severity.Error);
+        }
+
+    }
 
     private void Cancel() => MudDialog.Cancel();
 }
