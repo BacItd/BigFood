@@ -12,7 +12,7 @@ namespace BigFoodAPI.Controllers
         BigFoodDbContext _context = new BigFoodDbContext();
 
         [HttpGet("Get-All")]
-        public ActionResult GetAllFood(string search)
+        public ActionResult GetAllFood()
         {
             var lst = _context.Foods.ToList();
             return Ok(lst);

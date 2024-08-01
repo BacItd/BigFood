@@ -35,9 +35,20 @@
                     <MudTh>Thao tác</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="Họ tên">@context.ImageUrl</MudTd>
+                    <MudTd DataLabel="Họ tên">
+                        <MudImage Width="150" Src="@context.ImageUrl" />
+                    </MudTd>
                     <MudTd DataLabel="Ngày sinh">@context.Name</MudTd>
-                    <MudTd DataLabel="Số điện thoại">@context.CategoryId</MudTd>
+                    <MudTd DataLabel="Số điện thoại">
+                        @foreach (var item in Categories)
+                        {
+                            if (@context.CategoryId == item.Id)
+                            {
+                                @item.Name
+                                break;
+                            }
+                        }
+                    </MudTd>
                     <MudTd DataLabel="Số điện thoại">@context.PriceCurrent</MudTd>
                     <MudTd DataLabel="Lớp">@context.Quantity</MudTd>
 
@@ -74,9 +85,12 @@
 @code {
     private List<Food>? Foods;
 
+    private List<Category> Categories;
+
     protected override async Task OnInitializedAsync()
     {
         Foods = await FoodServices.GetAllFood();
+        Categories = await categoryServices.GetAllCategory(null);
     }
 
     private readonly DialogOptions _maxWidth = new() { MaxWidth = MaxWidth.Small, FullWidth = true };

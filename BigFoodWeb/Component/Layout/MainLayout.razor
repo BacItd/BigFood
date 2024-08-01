@@ -2,7 +2,7 @@
 
 @inject NavigationManager NavigationManager
 
-
+@inject IDialogService DialogService
 
 <style>
     .hover-opacity-child {
@@ -202,14 +202,16 @@
             @* tìm kiếm và giỏ hàng *@
             <div class="col-2">
                 <div class="d-flex justify-content-end gap-4">
-                    <div class="d-flex align-items-center">
-                        <input type="text" class="rounded-2" style="width: 15rem; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);" />
-                        <i class="fa-solid fa-magnifying-glass" style="color: #603913; margin-left: -1.5rem"></i>
+                    <div>
+                        <MudIconButton OnClick="@(() => OpenDialogAsync(_maxWidth))" Style="padding: 0" Icon="@Icons.Material.Filled.Search" Color="Color.Default" />
                     </div>
 
                     <div>
                         <a href="/cart">
-                            <i class="fa-solid fa-basket-shopping" style="color: #603913;"></i>
+                            <MudBadge Content="100" Overlap="true">
+                                <MudIconButton Style="padding: 0; background-color: transparent" Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Default" />
+                            </MudBadge>
+
                         </a>
                     </div>
                 </div>
@@ -288,5 +290,17 @@
     {
         sessionStorage.ClearAsync();
         NavigationManager.NavigateTo("/Login", true);
+    }
+
+    private readonly DialogOptions _maxWidth = new()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            CloseButton = true
+        };
+
+    private async Task OpenDialogAsync(DialogOptions options)
+    {
+        var dialog = await DialogService.ShowAsync<BigFoodWeb.Component.Pages.Customer.Dialog.SearchDialog>("Search Dialog", options);
     }
 }

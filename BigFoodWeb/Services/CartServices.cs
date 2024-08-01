@@ -17,6 +17,11 @@ namespace BigFoodWeb.Services
             return await _httpClient.GetFromJsonAsync<Cart>($"Cart/Get-Cart-By-Id?id={id}");
         }
 
+        public async Task<Cart> GetCartByIdUser(Guid id)
+        {
+            return await _httpClient.GetFromJsonAsync<Cart>($"Cart/Get-Cart-By-Id-User?id={id}");
+        }
+
         public async Task<bool> CreateCart(Cart cart)
         {
             var check = await _httpClient.PostAsJsonAsync<Cart>("Cart/Create", cart);

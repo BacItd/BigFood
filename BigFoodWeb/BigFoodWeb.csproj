@@ -28,4 +28,10 @@
     <ProjectReference Include="..\BigFoodData\BigFoodData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Cake\" />
+    <Folder Include="wwwroot\images\birthday-cake\" />
+    <Folder Include="wwwroot\images\Pizza\" />
+  </ItemGroup>
+
 </Project>

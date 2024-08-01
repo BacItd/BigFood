@@ -26,20 +26,11 @@
                 <MudTextField Style="padding: 0" T="string" Label="Nguyên liệu" Value="@Foods.Ingredient" ReadOnly=true />
                 <MudTextField Style="padding: 0" T="string" Label="Thể loại" Value="@Foods.CategoryId.ToString()" ReadOnly=true />
                 <MudDatePicker Style="padding: 0" Label="Ngày tạo" @bind-Date="DateTimeByFood" ReadOnly=true DateFormat="dd.MM.yyyy" />
+                <MudTimePicker Style="padding: 0" Label="Thời gian tạo" @bind-Time="TimeByFood" ReadOnly=true />
                 <MudNumericField Style="padding: 0" Label="Giá bán" Value="@Foods.PriceCurrent" ReadOnly=true />
                 <MudNumericField Style="padding: 0" Label="Giảm giá" Value="@Foods.PriceSale" ReadOnly=true />
                 <MudNumericField Style="padding: 0" Label="Số lượng" Value="@Foods.Quantity" ReadOnly=true />
                 <MudNumericField Style="padding: 0" Label="Số lượng đã bán" Value="@Foods.QuantitySold" ReadOnly=true />
-                @if (Foods.Status == 1)
-                {
-
-                    <MudRadio Dense="true" Color="Color.Primary" Value="true">Hoạt động</MudRadio>
-                }
-                else if (Foods.Status == 2)
-                {
-
-                    <MudRadio Dense="true" Color="Color.Secondary" Value="true">Không hoạt động</MudRadio>
-                }
             </MudForm>
         }
     </DialogContent>
@@ -58,12 +49,14 @@
     public string IdFood { get; set; }
 
     private DateTime? DateTimeByFood;
+    private TimeSpan? TimeByFood;
 
     private Food? Foods { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Foods = await FoodServices.GetById(Guid.Parse(IdFood));
-        DateTimeByFood = Foods.DateCreate.Date;
+        DateTimeByFood = Foods.DateCreate;
+        TimeByFood = Foods.DateCreate.TimeOfDay;
     }
 }

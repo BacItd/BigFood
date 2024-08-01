@@ -77,6 +77,7 @@
         foreach (var item in lstUser)
         {
             var roleName = await roleServices.GetRoleById(item.RoleId);
+            var cartId = await cartServices.GetCartByIdUser(item.Id);
             if(UserName == item.userName && Password == item.password)
             {
                 if(roleName.Name.ToLower() == "customer".ToLower())
@@ -84,6 +85,7 @@
 
                     await sessionStorage.SetItemAsync("userId", item.Id);
                     await sessionStorage.SetItemAsync("UserName", item.name);
+                    await sessionStorage.SetItemAsync("cartId", cartId.Id);
                     Snackbar.Add("Đăng nhập thành công", Severity.Success);
                     NavigationManager.NavigateTo("/", true);
                     loginIssuccessful = true;

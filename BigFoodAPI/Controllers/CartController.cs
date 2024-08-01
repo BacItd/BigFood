@@ -16,6 +16,12 @@ namespace BigFoodAPI.Controllers
             return Ok(_context.Carts.Find(id));
         }
 
+        [HttpGet("Get-Cart-By-Id-User")]
+        public ActionResult GetByIdUser(Guid id)
+        {
+            return Ok(_context.Carts.FirstOrDefault(x => x.UserId == id));
+        }
+
         [HttpPost("Create")]
         public ActionResult Create(Cart cart)
         {

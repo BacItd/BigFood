@@ -1,16 +1,37 @@
-﻿<MudDialog>
+﻿
+<MudDialog>
     <TitleContent>
         <MudText Style="font-size: 18px; font-weight: bold; text-transform: uppercase">Thêm mới đồ ăn</MudText>
     </TitleContent>
     <DialogContent>
-        <MudForm Spacing="5">
-            <MudTextField T="string" Label="Tên đồ ăn" />
-            <MudNumericField Label="Giá" Min="0" />
-            <MudNumericField Label="Số lượng" Min="0" />
-            <MudTextField T="string" Label="Mô tả" />
-            <MudRadioGroup @bind-Value="SelectedOption">
-                <MudRadio Value="@("Radio 1")" Color="Color.Primary">Hoạt động</MudRadio>
-                <MudRadio Value="@("Radio 2")" Color="Color.Secondary">Không hoạt động</MudRadio>
+        <MudForm Spacing="5" Model="@Food">
+            <MudFileUpload T="IBrowserFile">
+                <ActivatorContent>
+                    <MudFab
+                            StartIcon="@Icons.Material.Filled.Image"
+                            Label="Tải lên ảnh" />
+                </ActivatorContent>
+            </MudFileUpload>
+            <MudImage Width="100" Src="/images/Pizza/CHEESY+MADNESS+NO+NEW+PC.jpg" />
+            <MudTextField Style="padding: 0" T="string" Label="Tên đồ ăn" @bind-Value="@Food.Name" />
+            <MudTextField Style="padding: 0" T="string" Label="Nguyên liệu" Value="@Food.Ingredient" />
+            @if(lstCategories != null)
+            {
+                <MudSelect @bind-Value="@Food.CategoryId" Label="Thể loại">
+                    @foreach (var item in lstCategories)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            }
+            <MudNumericField Style="padding: 0" Label="Giá bán" @bind-Value="@Food.PriceCurrent" />
+            <MudNumericField Style="padding: 0" Label="Giảm giá" @bind-Value="@Food.PriceSale" />
+            <MudNumericField Style="padding: 0" Label="Số lượng" @bind-Value="@Food.Quantity" />
+            <MudNumericField Style="padding: 0" Label="Số lượng đã bán" @bind-Value="@Food.QuantitySold" />
+
+            <MudRadioGroup @bind-Value="StatusFood">
+                <MudRadio Value="1">Hoạt động</MudRadio>
+                <MudRadio Value="2">Không hoạt động</MudRadio>
             </MudRadioGroup>
         </MudForm>
     </DialogContent>
@@ -25,6 +46,17 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
+    private Food Food { get; set; } = new();
+
+    private List<Category>? lstCategories;
+
+    private int StatusFood = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        lstCategories = await categoryServices.GetAllCategory(null);
+    }
+
     private void Submit() => MudDialog.Close(DialogResult.Ok(true));
 
     private void Cancel() => MudDialog.Cancel();
@@ -35,5 +67,4 @@
     {
         SelectedOption = null;
     }
-
 }

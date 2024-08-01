@@ -1,0 +1,27 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Style="color: #333; font-size: 22px; font-weight: 700">Tìm kiếm</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField T="string" TextChanged="OnSearch" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" @bind-Value="TextSearch"></MudTextField>
+
+        <MudGrid Style="margin-top: 20px">
+            <MudItem>
+
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private string? TextSearch;
+
+    private async Task OnSearch()
+    {
+        
+    }
+}
