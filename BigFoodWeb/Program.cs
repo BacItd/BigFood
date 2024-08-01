@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
+using Blazored.SessionStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -13,6 +14,9 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
+//Add session
+builder.Services.AddBlazoredSessionStorage();
+
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7240/") });
 
 builder.Services.AddScoped<FoodServices>();
@@ -20,6 +24,7 @@ builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<SaleServices>();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<RoleServices>();
+builder.Services.AddScoped<CartServices>();
 
 builder.Services.AddMudServices(config =>
 {

@@ -1,0 +1,112 @@
+﻿@page "/Login"
+@layout Layout.MainLayout
+
+<MudPaper style="padding: 5.625rem; background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/sub-banner-top.jpg?1662429924636) no-repeat; background-size: cover; width: 100%;">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudPaper Style="width: 100%; text-align: center; background-color: transparent; box-shadow: none">
+            <MudText style="color: #fff; margin: 0; font-size: 60px; font-weight: 400">Đăng nhập</MudText>
+        </MudPaper>
+    </MudContainer>
+</MudPaper>
+
+ <div style="padding: 50px 0">
+    
+     <MudContainer MaxWidth="MaxWidth.Medium">
+        
+         <MudGrid>
+             <MudItem xl="6" lg="7" md="12" sm="12" xs="12">
+                <MudPaper Style="background-color: transparent; box-shadow: none">
+                     <MudForm>
+                         <MudTextField T="string" Label="Nhập email của bạn" @bind-Value="@UserName"/>
+                        <MudTextField T="string" Label="Nhập mật khẩu"InputType="InputType.Password" @bind-Value="@Password"/>
+                     </MudForm>
+                    <MudCardActions Style="width: 100%; padding: 20px 0 0">
+                        <MudButton Style="width: 100%; padding: 10px 0; background-color: #f2b94c; color: #fff; font-weight: 700" OnClick="Submit">Đăng nhập</MudButton>
+                    </MudCardActions>
+
+                    <MudText Style="font-size: 12px; color: #8e8e8e; margin: 15px 0; width: 100%; text-align: center">Hoặc</MudText>
+
+                    <MudGrid>
+                        <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                            <MudPaper Style="background-color: transparent; box-shadow: none">
+                                <MudButton Style="border: 1px solid #000;  width: 100%">
+                                    Facebook
+                                </MudButton>
+                            </MudPaper>
+                        </MudItem>
+
+                        <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                            <MudPaper Style="background-color: transparent; box-shadow: none">
+                                <MudButton Style="border: 1px solid #000; width: 100%">
+                                    Google
+                                </MudButton>
+                            </MudPaper>
+                        </MudItem>
+                    </MudGrid>
+                 </MudPaper>
+             </MudItem>
+
+             <MudItem xl="6" lg="5" md="12" sm="12" xs="12">
+                 <MudPaper Style="background-color: transparent; box-shadow: none">
+                    <MudImage Style="width: 100%" Src="https://img.freepik.com/free-vector/collection-handrawn-elements-bakery_125540-326.jpg?t=st=1721994274~exp=1721997874~hmac=8c005acfd616a063524b808148457df7f462fc525e3a0591accf95f0df8ee8b1&w=1380" />
+                 </MudPaper>
+             </MudItem>
+         </MudGrid>
+     </MudContainer>
+ </div>
+
+@code {
+    private string? UserName { get; set; }
+    private string? Password { get; set; }
+    private bool loginIssuccessful = false;
+
+    private List<User> lstUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        lstUser = await userServices.GetAllUser(null);
+    }
+
+    private async Task Submit()
+    {
+        foreach (var item in lstUser)
+        {
+            var roleName = await roleServices.GetRoleById(item.RoleId);
+            if(UserName == item.userName && Password == item.password)
+            {
+                if(roleName.Name.ToLower() == "customer".ToLower())
+                {
+
+                    await sessionStorage.SetItemAsync("userId", item.Id);
+                    await sessionStorage.SetItemAsync("UserName", item.name);
+                    Snackbar.Add("Đăng nhập thành công", Severity.Success);
+                    NavigationManager.NavigateTo("/", true);
+                    loginIssuccessful = true;
+                    break;
+                }
+                else if (roleName.Name.ToLower() == "admin".ToLower())
+                {
+                    await sessionStorage.SetItemAsync("userId", item.Id);
+                    await sessionStorage.SetItemAsync("UserName", item.name);
+
+                    NavigationManager.NavigateTo("/Admin/Home", true);
+                    Snackbar.Add("Đăng nhập thành công", Severity.Success);
+
+                    loginIssuccessful = true;
+                    break;
+                }
+            }
+        }
+
+        if(!loginIssuccessful)
+        {
+            Snackbar.Add("Đăng nhập thất bại", Severity.Error);
+        }
+    }
+    
+ }

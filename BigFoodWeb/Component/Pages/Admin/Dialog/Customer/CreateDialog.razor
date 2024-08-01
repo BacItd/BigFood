@@ -35,8 +35,16 @@
         var check = await userServices.CreateUser(user);
         if (check == true)
         {
-            MudDialog.Close(DialogResult.Ok(true));
-            Snackbar.Add("Thêm thành công", Severity.Success);
+            Cart cart = new Cart
+                {
+                    UserId = user.Id,
+                };
+            var createCart = await cartServices.CreateCart(cart);
+            if (createCart == true)
+            {
+                MudDialog.Close(DialogResult.Ok(true));
+                Snackbar.Add("Thêm thành công", Severity.Success);
+            }
         }
         else
         {

@@ -1,0 +1,93 @@
+﻿@page "/SignUp"
+@layout Layout.MainLayout
+@inject NavigationManager navigationManager
+
+<MudPaper style="padding: 5.625rem; background: url(https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/sub-banner-top.jpg?1662429924636) no-repeat; background-size: cover; width: 100%;">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudPaper Style="width: 100%; text-align: center; background-color: transparent; box-shadow: none">
+            <MudText style="color: #fff; margin: 0; font-size: 60px; font-weight: 400">Đăng Ký</MudText>
+        </MudPaper>
+    </MudContainer>
+</MudPaper>
+
+<div style="padding: 50px 0">
+
+    <MudContainer MaxWidth="MaxWidth.Medium">
+
+        <MudGrid Style="align-items: center">
+            <MudItem xl="6" lg="7" md="12" sm="12" xs="12">
+                <MudPaper Style="background-color: transparent; box-shadow: none">
+                    <MudForm Spacing="5" Model="@user" @ref="form">
+                        <MudTextField Style="padding: 0" T="string" Label="Họ và tên" For="@(() => user.name)" @bind-Value="@user.name" />
+                        <MudTextField Style="padding: 0" T="string" Label="Email" For="@(() => user.email)" @bind-Value="@user.email" />
+                        <MudTextField Style="padding: 0" T="string" Label="Số điện thoại" For="@(() => user.phoneNumber)" @bind-Value="@user.phoneNumber" />
+                        <MudTextField Style="padding: 0" T="string" Label="Địa chỉ" For="@(() => user.address)" @bind-Value="@user.address" />
+                        <MudTextField Style="padding: 0" T="string" Label="Password" For="@(() => user.password)" @bind-Value="@user.password" />
+                    </MudForm>
+                    <MudCardActions Style="width: 100%; padding: 20px 0 0">
+                        <MudButton Style="width: 100%; padding: 10px 0; background-color: #f2b94c; color: #fff; font-weight: 700" OnClick="Submit">Đăng ký</MudButton>
+                    </MudCardActions>
+
+                    <MudText Style="font-size: 12px; color: #8e8e8e; margin: 15px 0; width: 100%; text-align: center">Hoặc</MudText>
+
+                    <MudGrid>
+                        <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                            <MudPaper Style="background-color: transparent; box-shadow: none">
+                                <MudButton Style="border: 1px solid #000;  width: 100%">
+                                    Facebook
+                                </MudButton>
+                            </MudPaper>
+                        </MudItem>
+
+                        <MudItem xl="6" lg="6" md="6" sm="12" xs="12">
+                            <MudPaper Style="background-color: transparent; box-shadow: none">
+                                <MudButton Style="border: 1px solid #000; width: 100%">
+                                    Google
+                                </MudButton>
+                            </MudPaper>
+                        </MudItem>
+                    </MudGrid>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xl="6" lg="5" md="12" sm="12" xs="12">
+                <MudPaper Style="background-color: transparent; box-shadow: none">
+                    <MudImage Style="width: 100%" Src="https://img.freepik.com/free-vector/collection-handrawn-elements-bakery_125540-326.jpg?t=st=1721994274~exp=1721997874~hmac=8c005acfd616a063524b808148457df7f462fc525e3a0591accf95f0df8ee8b1&w=1380" />
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</div>
+
+@code {
+    private User user { get; set; } = new();
+
+    MudForm form;
+
+    private async void Submit()
+    {
+        user.userName = user.email;
+        user.RoleId = 3;
+        user.status = 1;
+        user.accumulatepoint = 0;
+        var check = await userServices.CreateUser(user);
+        if (check == true)
+        {
+            Cart cart = new Cart
+                {
+                    UserId = user.Id,
+                };
+            var createCart = await cartServices.CreateCart(cart);
+            if (createCart == true)
+            {
+                navigationManager.NavigateTo("/Login");
+                Snackbar.Add("Đăng ký thành công", Severity.Success);
+            }
+        }
+        else
+        {
+            Snackbar.Add("Thêm thất bại", Severity.Error);
+        }
+    }
+}
+

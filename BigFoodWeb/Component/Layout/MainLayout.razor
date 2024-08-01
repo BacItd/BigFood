@@ -69,15 +69,28 @@
                             </li>
 
                             <li class="dropdown">
-                                <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px">
-                                    Tài khoản
-                                </span>
+                                @if (userId != null)
+                                {
+                                    <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px">
+                                        @userNamne
+                                    </span>
 
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link ps-3" href="/SignUp" style="font-size: 14px;"><span>Đăng ký</span></a></li>
-                                    <li><a class="nav-link ps-3" href="Login" style="font-size: 14px">Đăng nhập</a></li>
+                                    <ul class="dropdown-menu">
+                                        <li><MudButton class="nav-link ps-3" href="/SignUp" style="font-size: 14px; width: 100%">Information</MudButton></li>
+                                        <li><MudButton class="nav-link ps-3" style="font-size: 14px; width: 100%" OnClick="SignOut">Đăng xuất</MudButton></li>
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px">
+                                        Tài khoản
+                                    </span>
 
-                                </ul>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link ps-3" href="/SignUp" style="font-size: 14px;"><span>Đăng ký</span></a></li>
+                                        <li><a class="nav-link ps-3" href="/Login" style="font-size: 14px">Đăng nhập</a></li>
+                                    </ul>
+                                }
                             </li>
                         </ul>
                     </div>
@@ -256,3 +269,24 @@
     </div>
 </footer>
 
+@code {
+    private string userId;
+    private string userNamne;
+    protected override async void OnInitialized()
+    {
+        userId = await sessionStorage.GetItemAsync<string>("userId");
+        userNamne = await sessionStorage.GetItemAsync<string>("UserName");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        userId = await sessionStorage.GetItemAsync<string>("userId");
+        userNamne = await sessionStorage.GetItemAsync<string>("UserName");
+    }
+
+    private async Task SignOut()
+    {
+        sessionStorage.ClearAsync();
+        NavigationManager.NavigateTo("/Login", true);
+    }
+}
