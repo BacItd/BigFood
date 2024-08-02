@@ -255,18 +255,19 @@
 
     <div style="padding-bottom: .7rem">
         <div class="container">
-            <div class="d-flex justify-content-between">
-                <div>
+            <MudGrid Style="padding: 0; width: 100%; align-items: center">
+                <MudItem xl="4" lg="4" md="5" sm="6" xs="12">
                     <span>© Bản quyền thuộc về</span>
                     <span style="color: #f2b94c">XPK4 Team</span>
                     <span>| Cung cấp bởi</span>
                     <span style="color: #f2b94c">PacNe</span>
-                </div>
+                </MudItem>
 
-                <div>
+                <MudItem xl="4" lg="4" md="2" sm="0" xs="0"></MudItem>
+                <MudItem xl="4" lg="4" md="5" sm="6" xs="12">
                     <img src="https://bizweb.dktcdn.net/100/053/643/themes/877493/assets/payment.jpg?1676015641182" width="100%" />
-                </div>
-            </div>
+                </MudItem>
+            </MudGrid>
         </div>
     </div>
 </footer>
@@ -294,7 +295,7 @@
 
     private readonly DialogOptions _maxWidth = new()
         {
-            MaxWidth = MaxWidth.Medium,
+            MaxWidth = MaxWidth.Large,
             FullWidth = true,
             CloseButton = true
         };
