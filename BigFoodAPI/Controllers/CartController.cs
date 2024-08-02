@@ -36,5 +36,29 @@ namespace BigFoodAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("Get-All-CartDetails-By-CartId")]
+        public ActionResult GetAllCartDetail(Guid id)
+        {
+            
+            return Ok(_context.CartDetails.Where(x => x.CartId == id).ToList());
+        }
+
+        [HttpDelete("Delete-CartDetail-By-Id")]
+        public ActionResult DeleteCartDetail(int id)
+        {
+            try
+            {
+                var obj = _context.CartDetails.Find(id);
+
+                _context.CartDetails.Remove(obj);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
     }
 }

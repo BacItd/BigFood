@@ -1,4 +1,4 @@
-﻿@page "/cart"
+﻿@page "/CartDetail/{id:guid}"
 @layout Layout.MainLayout
 <style>
 
@@ -104,11 +104,7 @@
                 <li style="width: 15%; border-right: 1px solid #ebebeb; height: 100% ;display: flex; align-items: center; justify-content: center">340000</li>
 
                 <li style="width: 14%; border-right: 1px solid #ebebeb; height: 100%; display: flex; align-items: center; justify-content: center">
-                    <ul class="m-0 p-0" style=" display: flex; justify-content: center">
-                        <li><button style="border: 1px solid #ddd; padding: 3px 8px">-</button></li>
-                        <li><button style="border: 1px solid #ddd; padding: 3px 8px">1</button></li>
-                        <li><button style="border: 1px solid #ddd; padding: 3px 8px">+</button></li>
-                    </ul>
+                    
                 </li>
 
                 <li style="width: 15%; border-right: 1px solid #ebebeb; height: 100%;  display: flex; align-items: center; justify-content: center">340000</li>
@@ -118,6 +114,55 @@
                 </li>
             </ul>
         </div>
+
+        <MudTable Items="@lstCartDetails" Dense="true" Hover="true" Virtualize="true" FixedHeader="true" HorizontalScrollbar="true" Height="600px">
+            <HeaderContent>
+                <MudTh>Ảnh</MudTh>
+                <MudTh>Tên món ăn</MudTh>
+                <MudTh>Giá</MudTh>
+                <MudTh>Số lượng</MudTh>
+                <MudTh>Thao tác</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Ảnh">
+                    <MudImage Width="150" Src="" />
+                </MudTd>
+                <MudTd DataLabel="Tên món ăn">
+                    @foreach (var item in lstFood)
+                    {
+                        if (context.FoodId == item.Id)
+                        {
+                            @item.Name
+                        }
+                    }
+                </MudTd>
+                <MudTd>
+                    @foreach (var item in lstFood)
+                    {
+                        if (context.FoodId == item.Id)
+                        {
+                            @item.PriceCurrent
+                        }
+                    }
+                </MudTd>
+                <MudTd DataLabel="Số lượng">
+                    <MudGrid>
+                        <MudItem xl="3" lg="3">
+                            <MudIconButton Icon="@Icons.Material.Filled.ExposureNeg1"></MudIconButton>
+                        </MudItem>
+                        <MudItem xl="6" lg="6">
+                            <MudTextField T="int" @bind-Value="@quantity" />
+                        </MudItem>
+                        <MudItem xl="3" lg="3">
+                            <MudIconButton Icon="@Icons.Material.Filled.ExposurePlus1"></MudIconButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudTd>
+                <MudTd DataLabel="Thao tác">
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
 
         <div>
             <div style="display: flex; align-items: center; border: 1px solid #ebebeb; border-top: 0">
@@ -140,3 +185,19 @@
     </div>
 
 </section>
+
+@code {
+    [Parameter]
+    public Guid id { get; set; }
+
+    private List<CartDetail> lstCartDetails;
+
+    private List<Food> lstFood;
+
+    private int quantity = 1;
+    protected override async Task OnInitializedAsync()
+    {
+        lstCartDetails = await cartServices.GetAllCartDetails(id);
+        lstFood = await FoodServices.GetAllFood();
+    }
+}

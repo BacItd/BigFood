@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
 using Blazored.SessionStorage;
+using Microsoft.AspNetCore.Routing;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -25,6 +26,11 @@ builder.Services.AddScoped<SaleServices>();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<RoleServices>();
 builder.Services.AddScoped<CartServices>();
+
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add("cartId", typeof(string));
+});
 
 builder.Services.AddMudServices(config =>
 {

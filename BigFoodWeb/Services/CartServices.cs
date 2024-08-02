@@ -31,5 +31,20 @@ namespace BigFoodWeb.Services
             }
             return false;
         }
+
+        public async Task<List<CartDetail>> GetAllCartDetails(Guid id)
+        {
+            return await _httpClient.GetFromJsonAsync<List<CartDetail>>($"Cart/Get-All-CartDetails-By-CartId?id={id}");
+        }
+        
+        public async Task<bool> DeleteCartDetailById(int id)
+        {
+            var check = await _httpClient.DeleteAsync($"Cart/Delete-CartDetail-By-Id?id={id}");
+            if (check.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
